@@ -34,3 +34,24 @@ export interface NewsResponse {
     totalResults: number;
     articles: Article[];
 }
+
+export enum Endpoint {
+    Sources = 'sources',
+    Everything = 'everything',
+}
+
+export enum HttpMethod {
+    Get = 'GET',
+}
+
+export enum ErrorStatus {
+    Unauthorized = 401,
+    NotFound = 404,
+}
+
+export interface QueryOptions {
+    apiKey: string;
+    sources: string;
+}
+
+export type Callback<T> = (data: T) => void;
