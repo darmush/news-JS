@@ -1,49 +1,87 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>NewsPortal</title>
+        <title>News Portal</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap"
+        />
     </head>
     <body>
-        <header>
-            <h1>News Portal</h1>
+        <header class="header">
+            <h1 class="visually-hidden">News Portal</h1>
+            <a class="logo" href="./" aria-label="News Portal, home">N</a>
+            <button class="sources-button" type="button" aria-haspopup="dialog" aria-controls="sources-panel">
+                Sources
+            </button>
         </header>
-        <main>
-            <div class="sources buttons"></div>
-            <div class="news"></div>
-        </main>
-        <footer>
-            <p class="copyright">
-                Copyright <a href="https://newsapi.org">NewsAPI</a>
-            </p>
+
+        <main class="news"></main>
+
+        <footer class="footer">
+            <div class="footer__info">
+                <span class="footer__year">2026</span>
+                <a class="footer__github" href="https://github.com/darmush/">github.com/darmush</a>
+            </div>
+            <a class="footer__course" href="https://rs.school/courses/javascript">
+                <img class="footer__logo" src="assets/rs-school-logo.png" alt="RS School" />
+            </a>
         </footer>
 
-        <template id="sourceItemTemp">
-            <div class="source__item">
-                <span class="source__item-name"></span>
-            </div>
-        </template>
+        <div
+            class="sources-panel"
+            id="sources-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="sources-title"
+            hidden
+        >
+            <form class="sources-panel__form">
+                <div class="sources-panel__head">
+                    <h2 class="sources-panel__title" id="sources-title">Sources</h2>
+                    <p class="sources-panel__count" aria-live="polite">
+                        <span class="sources-panel__chosen">0</span>/10
+                    </p>
+                    <button class="sources-panel__close" type="button" aria-label="Close without changes"></button>
+                </div>
+                <ul class="sources"></ul>
+                <div class="sources-panel__actions">
+                    <button class="button button--ghost sources-panel__clear" type="button">Clear all</button>
+                    <button class="button" type="submit">Show news</button>
+                </div>
+            </form>
+        </div>
 
         <template id="newsItemTemp">
-            <div class="news__item">
+            <article class="news__item">
                 <div class="news__meta">
-                    <div class="news__meta-photo"></div>
-                    <ul class="news__meta-details">
-                        <li class="news__meta-author"></li>
-                        <li class="news__meta-date"></li>
-                    </ul>
+                    <span class="news__meta-author"></span>
+                    <span class="news__description-source"></span>
                 </div>
-                <div class="news__description">
-                    <h2 class="news__description-title"></h2>
-                    <h3 class="news__description-source"></h3>
-                    <p class="news__description-content"></p>
-                    <p class="news__read-more">
-                        <a href="#">Read More</a>
-                    </p>
+                <div class="news__meta-photo"></div>
+                <h2 class="news__description-title"></h2>
+                <p class="news__description-content"></p>
+                <div class="news__bottom">
+                    <span class="news__meta-date"></span>
+                    <span class="news__tag"></span>
                 </div>
-            </div>
+                <p class="news__read-more"><a href="#">Read more</a></p>
+            </article>
+        </template>
+
+        <template id="sourceItemTemp">
+            <li>
+                <label class="source__item">
+                    <input class="source__item-input" type="checkbox" name="source" />
+                    <span class="source__item-mark" aria-hidden="true"></span>
+                    <span class="source__item-name"></span>
+                </label>
+            </li>
         </template>
     </body>
 </html>
