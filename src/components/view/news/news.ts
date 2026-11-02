@@ -17,9 +17,7 @@ class News {
 
             const photo = newsClone.querySelector('.news__meta-photo');
             if (photo instanceof HTMLElement) {
-                photo.style.backgroundImage = `url(${
-                    item.urlToImage || 'img/news_placeholder.jpg'
-                })`;
+                photo.style.backgroundImage = `url(${item.urlToImage || 'img/news_placeholder.jpg'})`;
             }
 
             const date = item.publishedAt.slice(0, 10).split('-').reverse().join('-');
