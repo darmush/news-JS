@@ -4,7 +4,7 @@ import { Article } from '../../../types';
 const NEWS_LIMIT = 12;
 
 class News {
-    draw(data: ReadonlyArray<Article>): void {
+    draw(data: ReadonlyArray<Article>, categories: ReadonlyMap<string, string>): void {
         const news = data.slice(0, NEWS_LIMIT);
 
         const fragment = document.createDocumentFragment();
@@ -25,6 +25,7 @@ class News {
             }
 
             const date = item.publishedAt.slice(0, 10).split('-').reverse().join('.');
+            const category = item.source.id ? categories.get(item.source.id) : undefined;
 
             const field: Record<string, string | null> = {
                 '.news__meta-author': item.author,
@@ -32,6 +33,7 @@ class News {
                 '.news__description-title': item.title,
                 '.news__description-source': item.source.name,
                 '.news__description-content': item.description,
+                '.news__tag': category ? `#${category}` : null,
             };
 
             Object.entries(field).forEach(([selector, value]) => {
