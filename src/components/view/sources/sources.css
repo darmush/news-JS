@@ -1,34 +1,188 @@
-.sources {
-    display: flex;
-    flex-wrap: nowrap;
-    width: 100%;
-    height: 120px;
-    overflow: auto;
-    align-items: center;
-    font: 300 1em 'Fira Sans', sans-serif;
-}
-
-.source__item {
+.sources-button {
+    height: 36px;
+    padding: 0 var(--space-4);
+    border: var(--hairline) solid var(--ink);
     background: none;
-    border: 2px solid #30c5ff;
-    font: inherit;
-    line-height: 1;
-    margin: 0.5em;
-    padding: 1em 2em;
-    color: #70d6ff;
-    transition: 0.25s;
+    color: var(--ink);
+    font: 500 14px/1 var(--font);
     cursor: pointer;
 }
 
-.source__item:hover,
-.source__item:focus {
-    border-color: #3fcc59;
-    color: #69db7e;
-    box-shadow: 0 0.5em 0.5em -0.4em #3fcc59;
-    transform: translateY(-0.25em);
+.sources-button:hover {
+    background: var(--ink);
+    color: var(--paper);
+}
+
+.sources-panel {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    background: var(--white);
+    color: var(--ink);
+}
+
+.sources-panel[hidden] {
+    display: none;
+}
+
+.sources-panel__form {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.sources-panel__head {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: var(--space-2) var(--space-4);
+    min-height: 64px;
+    padding: var(--space-2) var(--space-4);
+    background: var(--white);
+    border-bottom: var(--hairline) solid var(--ink);
+}
+
+.sources-panel__title {
+    margin: 0;
+    font: 800 22px/1 var(--font);
+    font-stretch: 125%;
+}
+
+.sources-panel__count {
+    margin: 0;
+    color: var(--muted);
+    font-size: 15px;
+    font-variant-numeric: tabular-nums;
+}
+
+.sources-panel__close {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    margin-right: calc(var(--space-2) * -1);
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--ink);
+    cursor: pointer;
+}
+
+.sources-panel__close::before,
+.sources-panel__close::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 18px;
+    height: 2px;
+    background: currentColor;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.sources-panel__close::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.sources-panel__close:hover {
+    color: var(--red);
+}
+
+.sources {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    column-gap: var(--space-4);
+    margin: 0;
+    padding: var(--space-4) var(--space-4) var(--space-8);
+    list-style: none;
+}
+
+.source__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 40px;
+    font-size: 14px;
+    line-height: 1.25;
+    cursor: pointer;
+}
+
+.source__item:hover {
+    color: var(--red);
+}
+
+.source__item-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+.source__item-mark {
+    flex: none;
+    width: 14px;
+    height: 14px;
+}
+
+.source__item-input:checked + .source__item-mark::before {
+    content: '';
+    display: block;
+    width: 5px;
+    height: 10px;
+    margin-left: 4px;
+    border-right: 2px solid var(--red);
+    border-bottom: 2px solid var(--red);
+    transform: rotate(45deg);
+}
+
+.source__item-input:checked ~ .source__item-name {
+    color: var(--red);
+}
+
+.source__item-input:focus-visible ~ .source__item-name {
+    outline: 2px solid var(--red);
+    outline-offset: 2px;
 }
 
 .source__item-name {
-    font-weight: 400;
-    white-space: nowrap;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.source__item:has(.source__item-input:disabled) {
+    color: var(--disabled);
+    cursor: not-allowed;
+}
+
+.sources-panel__actions {
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-2);
+    margin-top: auto;
+    padding: var(--space-3) var(--space-4);
+    background: var(--white);
+    border-top: var(--hairline) solid var(--ink);
+}
+
+@media (min-width: 640px) {
+    .sources-panel__head {
+        padding: var(--space-2) var(--space-6);
+    }
+
+    .sources {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: var(--space-8);
+        padding: var(--space-4) var(--space-6) var(--space-8);
+    }
+
+    .sources-panel__actions {
+        padding: var(--space-3) var(--space-6);
+    }
 }
