@@ -4,7 +4,7 @@ import { Article } from '../../../types';
 const NEWS_LIMIT = 12;
 
 class News {
-    draw(data: ReadonlyArray<Article>, categories: ReadonlyMap<string, string>): void {
+    public draw(data: ReadonlyArray<Article>, categories: ReadonlyMap<string, string>): void {
         const news = data.slice(0, NEWS_LIMIT);
 
         const fragment = document.createDocumentFragment();
